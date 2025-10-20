@@ -475,6 +475,7 @@ for(v in V(g)$name){
   while(color %in% neighbor_colors) color <- color + 1
   colors[v] <- color
 }
+
 result <- data.table(
   transmitter_id = df$transmitter_id,
   transmitter_name = df$transmitter_name,
