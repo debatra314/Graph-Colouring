@@ -28,7 +28,7 @@ greedy_coloring <- function(G) {
     color
 }
 
-# Run
+# Output of Greedy coloring on petersen graph
 G <- create_petersen()
 start <- Sys.time()
 color <- greedy_coloring(G)
@@ -75,7 +75,7 @@ welsh_powell <- function(G) {
     color
 }
 
-# Run
+# Output of Welsh-Powel on Petersen Graph
 G <- create_petersen()
 start <- Sys.time()
 color <- welsh_powell(G)
@@ -129,7 +129,7 @@ dsatur <- function(G) {
     color
 }
 
-# Run
+# Output of DSATUR on Petersen Graph
 G <- create_petersen()
 start <- Sys.time()
 color <- dsatur(G)
