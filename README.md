@@ -317,7 +317,7 @@ plot(
 
 # 5.5 Greedy coloring of Europe Map
 
-[language=R, caption={Greedy Coloring of Europe Map}, label={code:europe_greedy}]
+
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -360,12 +360,8 @@ ggplot(europe) +
 
   # 5.6 Greedy Coloring of Asia Map
 
-  [language=R, caption={Greedy Coloring of Asia Map}, label={code:asia_greedy}]
-# ------------------------------
-# Greedy Coloring of Asia Map
-# ------------------------------
+ 
 
-# Install required packages if not already installed
 required_packages <- c("sf","rnaturalearth","spdep","igraph","ggplot2")
 for(pkg in required_packages){
   if(!require(pkg, character.only = TRUE)){
@@ -374,7 +370,7 @@ for(pkg in required_packages){
   }
 }
 
-# Load libraries
+
 library(sf)
 library(rnaturalearth)
 library(spdep)
