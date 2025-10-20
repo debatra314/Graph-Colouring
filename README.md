@@ -1,4 +1,6 @@
 # 1.1 Implementation of Greedy Coloruing on Petersen Graph
+
+
 create_petersen <- function() {
     edges <- matrix(c(
         0,1, 1,2, 2,3, 3,4, 4,0,      # inner 5-cycle
@@ -16,7 +18,6 @@ create_petersen <- function() {
     }
     G
 }
-
 greedy_coloring <- function(G) {
     color <- rep(0, length(G))
     for (v in seq_along(G)) {
