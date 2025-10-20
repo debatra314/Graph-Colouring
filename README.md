@@ -28,17 +28,6 @@ greedy_coloring <- function(G) {
     color
 }
 
-# Output of Greedy coloring on petersen graph
-G <- create_petersen()
-start <- Sys.time()
-color <- greedy_coloring(G)
-end <- Sys.time()
-
-cat("---- Greedy Coloring ----\n")
-cat("Colors used :", max(color), "\n")
-cat("Time taken  :", as.numeric(end - start, units='secs'), "seconds\n")
-cat("Memory used :", object.size(G) + object.size(color), "bytes\n")
-
 
 
 
@@ -75,16 +64,7 @@ welsh_powell <- function(G) {
     color
 }
 
-# Output of Welsh-Powel on Petersen Graph
-G <- create_petersen()
-start <- Sys.time()
-color <- welsh_powell(G)
-end <- Sys.time()
 
-cat("---- Welsh–Powell Algorithm ----\n")
-cat("Colors used :", max(color), "\n")
-cat("Time taken  :", as.numeric(end - start, units='secs'), "seconds\n")
-cat("Memory used :", object.size(G) + object.size(color), "bytes\n")
 
 
 # 1.3 Implementation of DSATUR on petersen graph
@@ -129,16 +109,7 @@ dsatur <- function(G) {
     color
 }
 
-# Output of DSATUR on Petersen Graph
-G <- create_petersen()
-start <- Sys.time()
-color <- dsatur(G)
-end <- Sys.time()
 
-cat("---- DSatur Algorithm ----\n")
-cat("Colors used :", max(color), "\n")
-cat("Time taken  :", as.numeric(end - start, units='secs'), "seconds\n")
-cat("Memory used :", object.size(G) + object.size(color), "bytes\n")
 
 
 
