@@ -487,3 +487,98 @@ result <- data.table(
 fwrite(result, "C:/Users/debatra/OneDrive/Desktop/Frequency_Assignment_Results.csv")
 # For Dataset check Diebp Bguki
 # For Output check Screenshot 129
+
+
+# Generating graph on (50-200) vertices with different edge densities and assigning graph colouring
+
+
+
+library(igraph)
+
+greedy_coloring <- function(g) {
+  start_time <- Sys.time()
+  n <- vcount(g)
+  colors <- rep(NA, n)
+  for (v in 1:n) {
+    neighbor_colors <- colors[neighbors(g, v)]
+    colors[v] <- min(setdiff(1:n, neighbor_colors))
+  }
+  time_taken <- Sys.time() - start_time
+  list(colors = colors, num_colors = max(colors), time = time_taken)
+}
+
+welsh_powell_coloring <- function(g) {
+  start_time <- Sys.time()
+  n <- vcount(g)
+  deg <- degree(g)
+  order <- order(-deg)
+  colors <- rep(NA, n)
+  color <- 1
+  for (v in order) {
+    if (is.na(colors[v])) {
+      colors[v] <- color
+      for (u in order) {
+        if (is.na(colors[u]) && !are.connected(g, v, u)) {
+          if (!any(colors[neighbors(g, u)] == color, na.rm = TRUE))
+            colors[u] <- color
+        }
+      }
+      color <- color + 1
+    }
+  }
+  time_taken <- Sys.time() - start_time
+  list(colors = colors, num_colors = max(colors), time = time_taken)
+}
+
+dsatur_coloring <- function(g) {
+  start_time <- Sys.time()
+  n <- vcount(g)
+  colors <- rep(NA, n)
+  sat_deg <- rep(0, n)
+  deg <- degree(g)
+  
+  for (i in seq_len(n)) {
+    uncolored <- which(is.na(colors))
+    if (length(uncolored) == 0) break
+    v <- uncolored[which.max(sat_deg[uncolored] * n + deg[uncolored])]
+    neighbor_colors <- colors[neighbors(g, v)]
+    colors[v] <- min(setdiff(1:n, neighbor_colors))
+    for (u in neighbors(g, v)) {
+      if (is.na(colors[u])) {
+        sat_deg[u] <- length(unique(colors[neighbors(g, u)], na.rm = TRUE))
+      }
+    }
+  }
+  time_taken <- Sys.time() - start_time
+  list(colors = colors, num_colors = max(colors), time = time_taken)
+}
+
+
+set.seed(123)
+graphs <- list(
+  g1 = erdos.renyi.game(50, 0.1, type = "gnp"),
+  g2 = erdos.renyi.game(100, 0.3, type = "gnp"),
+  g3 = erdos.renyi.game(200, 0.6, type = "gnp")
+)
+
+
+for (name in names(graphs)) {
+  g <- graphs[[name]]
+  cat("\n=============================\n")
+  cat("Graph:", name, "\n")
+  cat("Nodes:", vcount(g), "Edges:", ecount(g), "\n")
+  cat("Density:", edge_density(g), "\n")
+  
+  res1 <- greedy_coloring(g)
+  cat("\n[Greedy Coloring] Colors Used:", res1$num_colors, "Time:", res1$time, "\n")
+  
+  res2 <- welsh_powell_coloring(g)
+  cat("\n[Welsh-Powell Coloring] Colors Used:", res2$num_colors, "Time:", res2$time, "\n")
+  
+  res3 <- dsatur_coloring(g)
+  cat("\n[DSatur Coloring] Colors Used:", res3$num_colors, "Time:", res3$time, "\n")
+}
+
+
+# For Output check screenshot 136
+
