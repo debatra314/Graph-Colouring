@@ -268,7 +268,7 @@ plot(
   main = "Exam Scheduling via Graph Coloring"
 )
 
-# For Output check Screenshot 125
+# For Output check Screenshot 126
 # For Dataset check Exam Sc2
 
 # 5.5 Greedy coloring of Europe Map
